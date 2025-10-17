@@ -1,16 +1,68 @@
+// schema.prisma wise schema.ts mane ei file e graph ql schema likhbo
+// ki ki data dekhte cai shei wise schema likha hocche
 export const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+    type Query {
+        me: User
+        users: [User]
+        posts: [Post]
+        profile(userId: ID!): Profile
+    }
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
-  }
+    type Mutation {
+        signup(
+            name: String!,
+            email: String!,
+            password: String!
+            bio: String
+        ): AuthPayload,
+        
+        signin(
+            email: String!
+            password: String!
+        ): AuthPayload,
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
-  }
+        addPost(post: PostInput!): PostPayload,
+        updatePost(postId: ID!, post: PostInput!): PostPayload,
+        deletePost(postId: ID!): PostPayload,
+        publishPost(postId: ID!): PostPayload
+    }
+
+    type Post {
+        id: ID!
+        title: String!
+        content: String!
+        author: User
+        createdAt: String!
+        published: Boolean!
+    }
+
+    type User {
+        id: ID!
+        name: String!
+        email: String!
+        createdAt: String!
+        posts: [Post]
+    }
+
+    type Profile {
+        id: ID!
+        bio: String!
+        createdAt: String!
+        user: User!
+    }
+
+    type AuthPayload {
+        userError: String
+        token: String
+    }
+
+    type PostPayload {
+        userError: String
+        post: Post
+    }
+
+    input PostInput {
+        title: String
+        content: String
+    }
 `;
