@@ -1,16 +1,13 @@
-const books = [
-  {
-    title: "The Awakening",
-    author: "Kate Chopin",
-  },
-  {
-    title: "City of Glass",
-    author: "Paul Auster",
-  },
-];
+import { Query } from "./Query/Query";
+import { Mutation } from "./Mutation/Mutation";
+import { Post } from "./post";
+import { User } from "./user";
+import { Profile } from "./profile";
 
 export const resolvers = {
-  Query: {
-    books: () => books,
-  },
+    Query,
+    Post,
+    User,
+    Profile,
+    Mutation
 };

@@ -1,5 +1,3 @@
-// schema.prisma wise schema.ts mane ei file e graph ql schema likhbo
-// ki ki data dekhte cai shei wise schema likha hocche
 export const typeDefs = `#graphql
     type Query {
         me: User
